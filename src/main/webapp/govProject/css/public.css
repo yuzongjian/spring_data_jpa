@@ -1,0 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+/*不换行的类*/
+/*用于商户认证*/
+.nowrapText {
+    white-space: nowrap;
+}

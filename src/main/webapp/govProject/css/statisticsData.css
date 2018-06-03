@@ -1,0 +1,18 @@
+body {
+    font-size: .16rem/* 16px */;
+}
+.data-panel {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 3rem/* 300px */;
+    border: 1px solid #eee;
+    border-top: .1rem/* 10px */ solid #eee;
+    padding: .1rem/* 10px */;
+    margin-top: .1rem/* 10px */;
+    margin-right: .5rem/* 50px */;
+}
+.data-panel > h3 {
+    line-height: .48rem/* 48px */;
+    font-size: .24rem/* 24px */;
+    text-align: right;
+}
