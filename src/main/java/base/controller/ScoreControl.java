@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import base.bean.user;
 import base.service.userService;
 
 
@@ -48,4 +52,9 @@ public class ScoreControl {
         map.put("data", userService.findAll());
         return map;
     }
+	@RequestMapping(value = "", method=RequestMethod.GET)
+	public Page<user> getEntryByPageable(@PageableDefault(value = 15, sort = { "id" }) 
+    Pageable pageable)  {
+	    return userService.findAll(pageable);
+	}
 }
