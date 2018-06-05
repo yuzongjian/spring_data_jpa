@@ -43,6 +43,8 @@ import base.service.userService;
 public class ScoreControl {  
 	@Autowired  
 	private userService userService;
+	@Autowired  
+	private base.service.pageService pageService;
 	@RequestMapping("/findall")
     @ResponseBody
     public Map<String, Object> getUser(){
@@ -52,9 +54,11 @@ public class ScoreControl {
         map.put("data", userService.findAll());
         return map;
     }
-	@RequestMapping(value = "", method=RequestMethod.GET)
+//	分页查询
+	@RequestMapping(value = "page", method=RequestMethod.GET)
+	 @ResponseBody
 	public Page<user> getEntryByPageable(@PageableDefault(value = 15, sort = { "id" }) 
     Pageable pageable)  {
-	    return userService.findAll(pageable);
+	    return pageService.findAll(pageable);
 	}
 }

@@ -6,6 +6,8 @@ package base.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import base.bean.user;
@@ -18,17 +20,9 @@ import base.bean.user;
 @Service
 public class pageService {
 	@Autowired
-    base.dao.userDao userDao;
-	public user findByUsername( String username) {
-        return userDao.findByUsername(username);
-    }
-	 public user findById(int id) {
-	        return userDao.findOne(id);
-	    }
-	 public List<user> findAll() {
-	        return userDao.findAll();
-	    }
-	 public user save(user user) {
-	        return userDao.save(user);
-	    }
+    base.dao.pageDao pageDao;
+	
+	 public Page<user> findAll(Pageable pageable){
+		 return pageDao.findAll(pageable);
+	 }
 }
