@@ -50,7 +50,13 @@ public class ScoreControl {
     public Map<String, Object> getUser(){
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("state", "success");
-        System.out.println(userService.findByUsername("123123").getPassword());
+        System.out.println(userService.findByUsername("123123"));
+        System.out.println(userService.findByPasswordAndUsernameLike("1123", "1231234"));
+//        userService.delete(1);  实现删除接口
+        System.out.println(userService.count());
+        System.out.println(userService.countByUsername( "12"));
+        System.out.println(userService.countByUsername( "1231234"));
+        System.out.println(userService.update("2", 4));
         map.put("data", userService.findAll());
         return map;
     }
@@ -60,5 +66,13 @@ public class ScoreControl {
 	public Page<user> getEntryByPageable(@PageableDefault(value = 15, sort = { "id" }) 
     Pageable pageable)  {
 	    return pageService.findAll(pageable);
+	}
+	
+	
+//	分页查询
+	@RequestMapping(value = "pageByUsername", method=RequestMethod.GET)
+	 @ResponseBody
+	public Page<user> getByPageable(@PageableDefault(value = 15, sort = { "id" }) @RequestParam(value="username",required=false)String username,Pageable pageable )  {
+	    return pageService.findByUserName(username, pageable);
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import base.bean.user;
+import base.dao.userDao;
 
 /**
  * @author yuzongjian
@@ -18,7 +19,7 @@ import base.bean.user;
 @Service
 public class userService {
 	@Autowired
-    base.dao.userDao userDao;
+    userDao userDao;
 	public user findByUsername( String username) {
         return userDao.findByUsername(username);
     }
@@ -31,4 +32,19 @@ public class userService {
 	 public user save(user user) {
 	        return userDao.save(user);
 	    }
+	 public user findByPasswordAndUsernameLike( String password,String username) {
+	        return userDao.findByPasswordAndUsernameLike(password,username);
+	    }
+	 public void delete(int id) {
+	        userDao.delete(id);
+	    }
+	 public long count() {
+		 return userDao.count();
+	 }
+	 public long countByUsername(String username) {
+		 return userDao.countByUsername( username);
+	 }
+	 public int update(String username , int id) {
+		 return userDao.update(username, id);
+	 }
 }

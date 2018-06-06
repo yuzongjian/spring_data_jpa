@@ -25,4 +25,7 @@ public class pageService {
 	 public Page<user> findAll(Pageable pageable){
 		 return pageDao.findAll(pageable);
 	 }
+	 public Page<user> findByUserName(String username,Pageable pageable){
+		 return pageDao.findByUsername(username, pageable);
+	 }
 }
