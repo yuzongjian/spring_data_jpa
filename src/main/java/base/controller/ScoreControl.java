@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +65,7 @@ public class ScoreControl {
 //	分页查询
 	@RequestMapping(value = "page", method=RequestMethod.GET)
 	 @ResponseBody
-	public Page<user> getEntryByPageable(@PageableDefault(value = 15, sort = { "id" }) 
+	public Page<user> getEntryByPageable(@PageableDefault(value = 15, sort = { "id","username" }, direction = Direction.DESC.ASC ) 
     Pageable pageable)  {
 	    return pageService.findAll(pageable);
 	}
