@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -63,12 +64,24 @@ public class ScoreControl {
         return map;
     }
 //	分页查询
+//http://localhost:5778/learning/second/page.do?page=3 通过get方法翻页
 	@RequestMapping(value = "page", method=RequestMethod.GET)
 	 @ResponseBody
-	public Page<user> getEntryByPageable(@PageableDefault(value = 15, sort = { "id","username" }, direction = Direction.DESC.ASC ) 
+	public Page<user> getEntryByPageable(@PageableDefault(value = 3, sort = { "id","username" }, direction = Direction.DESC ) 
     Pageable pageable)  {
 	    return pageService.findAll(pageable);
 	}
+	
+//	多条件分页查询
+	@RequestMapping(value = "page1", method=RequestMethod.GET)
+	 @ResponseBody
+	public Page<user> getEntryByPageable1(@RequestParam(value = "page", defaultValue = "0") Integer page,
+	        @RequestParam(value = "size", defaultValue = "3") Integer size)  {
+		  Sort sort = new Sort(Sort.Direction.DESC, "username").and(new Sort(Sort.Direction.ASC, "id"));
+		  Pageable pageable = new PageRequest(page, size, sort);
+	    return pageService.findAll(pageable);
+	}
+	
 	
 	
 //	分页查询
