@@ -23,7 +23,7 @@ public class PaymentOrderJob extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {  
         ApplicationContext applicationContext = (ApplicationContext) context.getJobDetail().getJobDataMap()  
                 .get("applicationContext");  
-        //时间参数，当前时间向前推2天  
+        //执行操作 
         applicationContext.getBean(userService.class).countByUsername("34");
     }  
   
